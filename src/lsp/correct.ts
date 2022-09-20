@@ -21,7 +21,7 @@ export class Premios {
     }
 }
 
-console.log('\n\n--- Incorrect way to use LSP ---\n\n')
+console.log('\n\n--- Correct way to use LSP ---\n\n')
 
 const movie = new Movie()
 const oscarMovie = new OscarMovie()
