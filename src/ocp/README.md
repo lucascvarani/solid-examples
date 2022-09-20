@@ -1,5 +1,5 @@
 OCP (Open-Closed Principle) -> Objetos ou entidades devem estar abertos para extensão, mas fechados para modificação.
-Perceba que no código incorreto (incorrect.ts), existem classes para tipos de investimento: Fundos Imobiliarios e Ações
+Perceba que no código incorreto (incorrect.ts) existem classes para tipos de investimento: Fundos Imobiliarios e Ações
 E cada classe possui um método próprio que calcula o rendimento de determinado investimento: getAluguelMensal e getDividendoMensal, respectivamente.
 Ao final existe uma classe responsável pelo calculo dos rendimentos de determinado investimento, a classe PagamentoMensal, que possui o método calcular.
 
