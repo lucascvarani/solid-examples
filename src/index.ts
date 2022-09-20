@@ -6,3 +6,5 @@ import './lsp/incorrect';
 import './lsp/correct';
 import './isp/incorrect';
 import './isp/correct';
+import './dip/incorrect';
+import './dip/correct';
