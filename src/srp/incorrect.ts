@@ -1,62 +1,36 @@
-interface MovieObject {
+interface Item {
+    id: number
     name: string
     description: string
-    director: string
-    theme: string
-    rate: number
+    price: number
 }
 
-enum MovieEnum {
-    NAME = 'name',
-    DESCRIPTION = 'description',
-    DIRECTOR = 'director',
-    THEME = 'theme',
-    RATE = 'rate',
-  }
+let items: Item[] = []
 
-const movies: MovieObject[] = []
-
-export class Movie {
-    public getMovieByName(name: string) {
-        return this.get(name, MovieEnum.NAME)
+/**
+ ** A classe "CarrinhoSupermercado" é responsável por 
+ ** adicionar, remover e ainda calcular o preço dos ítens do carrinho 
+**/
+export class CarrinhoSupermercado {
+    adicionaItem(item: Item) {
+        items.push(item)
     }
 
-    public getMovieByRate(rate: number) {
-        return this.get(rate, MovieEnum.RATE)
-        
+    removeItem(item: Item) {
+        items = items.filter(i => i.id != item.id)
     }
 
-    public getMovieByTheme(theme: string) {
-        return this.get(theme, MovieEnum.THEME)
-
-    }
-
-    public addMovie(movie: MovieObject) {
-        this.add(movie)
-    }
-
-    public showMovies(movies: MovieObject[]) {
-        this.print(movies)
-    }
-
-    public get(value: string | number, key: MovieEnum) {
-        return movies.filter(m => m[key] === value)
-    }
-
-    public add(movie: MovieObject) {
-        movies.push(movie)
-    }
-
-    public print(movies: MovieObject[]) {
-        console.log(movies)
+    calculaPrecoFinal() {
+          return items.reduce(function (acc, obj) { return acc + obj.price; }, 0);
     }
 }
 
 console.log('\n\n--- Incorrect way to use SRP ---\n\n')
 
-const movie = new Movie()
-movie.addMovie({ name: 'The Batman', theme: 'Hero', rate: 7.9, director: 'Matt Reeves', description: 'Batman is called to intervene when the mayor of Gotham City is murdered. Soon, his investigation leads him to uncover a web of corruption, linked to his own dark past.' })
-let filteredMovies = movie.getMovieByTheme('Hero')
-movie.showMovies(filteredMovies)
-filteredMovies = movie.getMovieByTheme('Drama')
-movie.showMovies(filteredMovies)
+const carrinhoSupermercado = new CarrinhoSupermercado()
+carrinhoSupermercado.adicionaItem({ id: 0, name: 'Açúcar', description: "Açúcar refinado", price: 10 })
+carrinhoSupermercado.adicionaItem({ id: 1, name: 'Sal', description: "Sal grosso para churrasco", price: 15 })
+const preco = carrinhoSupermercado.calculaPrecoFinal()
+console.log('Ítens:')
+console.log(items)
+console.log('Preco final:', preco)

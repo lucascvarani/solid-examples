@@ -1,3 +1,7 @@
+/* Perceba que existem diversas classes nesse arquivo. Isso não é uma boa prática, e foi feito apenas para exemplificar.
+ * O ideal é construir cada classe em um arquivo diferente, e realizar um import na hora de utilizá-las.
+*/
+
 interface MovieObject {
     id: number
     name: string
@@ -31,6 +35,8 @@ export class MovieRepository implements MovieRepositoryInterface {
 
 export class Movie {
     movieRepository: MovieRepositoryInterface
+
+    /* Perceba que a classe Movie não conhece a implementação do Repository, apenas a interface dele. */
     constructor(movieRepository: MovieRepositoryInterface) {
         this.movieRepository = movieRepository
     }

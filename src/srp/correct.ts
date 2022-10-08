@@ -1,74 +1,40 @@
-interface MovieObject {
+/* Perceba que existem diversas classes nesse arquivo. Isso não é uma boa prática, e foi feito apenas para exemplificar.
+ * O ideal é construir cada classe em um arquivo diferente, e realizar um import na hora de utilizá-las.
+*/
+
+interface Item {
+    id: number
     name: string
     description: string
-    director: string
-    theme: string
-    rate: number
+    price: number
 }
+/** A variável "items" representa nossos registros no banco de dados **/
+let items: Item[] = []
 
-enum MovieEnum {
-    NAME = 'name',
-    DESCRIPTION = 'description',
-    DIRECTOR = 'director',
-    THEME = 'theme',
-    RATE = 'rate',
-  }
-
-const movies: MovieObject[] = []
-
-export class Movie {
-    movieRepository: MovieRepository
-    movieViewer: MovieViewer
-    constructor() {
-        this.movieRepository = new MovieRepository()
-        this.movieViewer = new MovieViewer()
+export class CarrinhoSupermercado {
+    adicionaItem(item: Item) {
+        items.push(item)
     }
 
-    public getMovieByName(name: string) {
-        return this.movieRepository.get(name, MovieEnum.NAME)
-    }
-
-    public getMovieByRate(rate: number) {
-        return this.movieRepository.get(rate, MovieEnum.RATE)
-        
-    }
-
-    public getMovieByTheme(theme: string) {
-        return this.movieRepository.get(theme, MovieEnum.THEME)
-
-    }
-
-    public addMovie(movie: MovieObject) {
-        this.movieRepository.add(movie)
-    }
-
-    public showMovies(movies: MovieObject[]) {
-        this.movieViewer.print(movies)
+    removeItem(item: Item) {
+        items = items.filter(i => i.id != item.id)
     }
 }
 
-export class MovieRepository {
-    public get(value: string | number, key: MovieEnum) {
-        return movies.filter(m => m[key] === value)
-    }
-
-    public add(movie: MovieObject) {
-        movies.push(movie)
-    }
-}
-
-export class MovieViewer {
-
-    public print(movies: MovieObject[]) {
-        console.log(movies)
+/** Há agora uma classe totalmente responsável por todos os processos de finalização de compras **/
+export class Checkout {
+    calculaPrecoFinal() {
+          return items.reduce(function (acc, obj) { return acc + obj.price; }, 0);
     }
 }
 
 console.log('\n\n--- Correct way to use SRP ---\n\n')
 
-const movie = new Movie()
-movie.addMovie({ name: 'The Batman', theme: 'Hero', rate: 7.9, director: 'Matt Reeves', description: 'Batman is called to intervene when the mayor of Gotham City is murdered. Soon, his investigation leads him to uncover a web of corruption, linked to his own dark past.' })
-let filteredMovies = movie.getMovieByTheme('Hero')
-movie.showMovies(filteredMovies)
-filteredMovies = movie.getMovieByTheme('Drama')
-movie.showMovies(filteredMovies)
+const carrinhoSupermercado = new CarrinhoSupermercado()
+const checkout = new Checkout()
+carrinhoSupermercado.adicionaItem({ id: 0, name: 'Açúcar', description: "Açúcar refinado", price: 10 })
+carrinhoSupermercado.adicionaItem({ id: 1, name: 'Sal', description: "Sal grosso para churrasco", price: 15 })
+const preco = checkout.calculaPrecoFinal()
+console.log('Ítens:')
+console.log(items)
+console.log('Preco final:', preco)
