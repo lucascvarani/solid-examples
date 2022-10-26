@@ -46,7 +46,7 @@ export class Movie {
     }
 
     setDirector(id: number, director: string) {
-        this.movieRepository.setName(id, director)
+        this.movieRepository.setDirector(id, director)
     }
 }
 
