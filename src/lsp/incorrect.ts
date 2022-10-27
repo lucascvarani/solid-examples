@@ -15,7 +15,7 @@ export class Veiculo {
     }
 }
 
-export class Moto implements Veiculo {
+export class Moto extends Veiculo {
     public acelerar(): void {
         // Implementa acelerar para moto
     }
@@ -29,7 +29,7 @@ export class Moto implements Veiculo {
     }
 }
 
-export class Onibus implements Veiculo {
+export class Onibus extends Veiculo {
     public acelerar(): void {
         // Implementa acelerar para onibus
     }
@@ -43,15 +43,14 @@ export class Onibus implements Veiculo {
     }
 }
 
-/* Perceba que a classe CarroEletrico está alegando erro, uma vez que o método "encherTanqueCombustivel" não está implementado */
-export class CarroEletrico implements Veiculo {
+/* Perceba que a classe CarroEletrico não possui tanque de combustível */
+export class CarroEletrico extends Veiculo {
     public acelerar(): void {
         // Implementa acelerar para moto
     }
 
     /* Perceba que o método "encherTanqueCombustivel" não faz sentido para um carro elétrico. 
-    *  Ele está implementando na classe veículo, então esse método DEVERIA existir para ele poder ser do tipo "Veiculo" também.
-    *  Entretanto, é um método que não faria nada.
+    *  Ele está implementando na classe veículo, então esse existe para ele poder ser do tipo "Veiculo" também.
     */
 
     // Esse método só foi implementado para que o typescript não alegue nenhum erro.

@@ -27,7 +27,7 @@ export class VeiculoEletrico {
     }
 }
 
-export class Moto implements Veiculo {
+export class Moto extends Veiculo {
     public acelerar(): void {
         // Implementa acelerar para moto
     }
@@ -41,7 +41,7 @@ export class Moto implements Veiculo {
     }
 }
 
-export class Onibus implements Veiculo {
+export class Onibus extends Veiculo {
     public acelerar(): void {
         // Implementa acelerar para onibus
     }
@@ -55,8 +55,7 @@ export class Onibus implements Veiculo {
     }
 }
 
-/* Perceba que a classe CarroEletrico está alegando erro, uma vez que o método "encherTanqueCombustivel" não está implementado */
-export class CarroEletrico implements VeiculoEletrico {
+export class CarroEletrico extends VeiculoEletrico {
     public acelerar(): void {
         // Implementa acelerar para carro elétrico
     }

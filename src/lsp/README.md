@@ -1,9 +1,9 @@
 LSP (Liskov Substitution Principle) -> Se para cada objeto o1 do tipo S há um objeto o2 do tipo T de forma que, para todos os programas P definidos em termos de T, o comportamento de P é inalterado quando o1 é substituído por o2 então S é um subtipo de T.
 Em outras palavras o princípio da substituição de Liskov diz que, se A é subtipo de B, então os objetos instanciados de A podem ser substituidos pelos objetos instanciados de B sem que haja complicações no programa.
 
-Perceba que no código incorreto (incorrect.ts), existe a classe "Veiculo" (classe pai), "Moto", "Onibus" e "CarroEletrico" (classes filhas), onde todos os filhos implementam a classe pai.
+Perceba que no código incorreto (incorrect.ts), existe a classe "Veiculo" (classe pai), "Moto", "Onibus" e "CarroEletrico" (classes filhas), onde todos os filhos extendem a classe pai.
 A classe veículo possui o método "encherTanqueCombustivel".
-Dessa forma, a classe moto e a classe ônibus, também possuem implementação desse método. Dessa forma, pode-se substituir o tipo da classe Moto (e Onibus) por "Veiculo". Entretanto, a classe "CarroEletrico" não possui o método "encherTanqueCombustivel" (esse método só foi implementado para que o typescrip não alegue erro), então, não é possível dizer que ele é do tipo "Veiculo".
+Dessa forma, a classe moto e a classe ônibus, também possuem implementação desse método. Dessa forma, pode-se substituir o tipo da classe Moto (e Onibus) por "Veiculo". Entretanto, na classe "CarroEletrico" não faz sentido o método "encherTanqueCombustivel", então, não é possível dizer que ele é do tipo "Veiculo".
 
 Uma das alternativas para realizar uma implementação seguindo o princípio da Substituição de Liskov, é utilizar o ISP (Interface Segregation Principle) - que também está exemplificado nesse repositório. Dessa forma, é isso que o arquivo "correct.ts" faz. Dessa vez, as classes pai foram separadas em duas: "Veiculo" e "VeiculoEletrico", onde "Veiculo" possui o método "encherTanqueCombustivel", e "VeiculoEletrico" possui o método "carregarBateria".
-Dessa forma, as classes "Moto" e "Onibus" implementam a classe "Veiculo", e a classe "CarroEletrico" implementa a classe "VeiculoEletrico".
+Dessa forma, as classes "Moto" e "Onibus" extendem a classe "Veiculo", e a classe "CarroEletrico" extende a classe "VeiculoEletrico".
